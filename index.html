@@ -127,20 +127,23 @@
                     </div>
                 </div>
 
-                <!-- Left/Bottom: Medium World Clocks -->
+                <!-- Left/Bottom: Medium World Clocks with Country, Date & Weekday -->
                 <div class="w-full md:w-auto shrink-0">
                     <div class="grid grid-cols-3 gap-2">
                         <div class="bg-blue-950/80 border border-blue-400/35 rounded-2xl px-3 py-2 text-center">
-                            <div class="text-[11px] font-bold text-blue-200">🇦🇫 افغانستان</div>
+                            <div id="labelCountryAfg" class="text-[11px] font-bold text-blue-200">🇦🇫 افغانستان</div>
                             <div id="clockAfghanistan" class="text-sm sm:text-base font-black text-sky-300 font-mono mt-0.5">--:--:--</div>
+                            <div id="dateCountryAfg" class="text-[10px] text-sky-200/85 mt-0.5 leading-tight">--</div>
                         </div>
                         <div class="bg-slate-900/90 border border-white/25 rounded-2xl px-3 py-2 text-center">
-                            <div class="text-[11px] font-bold text-slate-200">🇮🇷 ایران</div>
+                            <div id="labelCountryIran" class="text-[11px] font-bold text-slate-200">🇮🇷 ایران</div>
                             <div id="clockIran" class="text-sm sm:text-base font-black text-white font-mono mt-0.5">--:--:--</div>
+                            <div id="dateCountryIran" class="text-[10px] text-slate-300/85 mt-0.5 leading-tight">--</div>
                         </div>
                         <div class="bg-rose-950/80 border border-rose-400/35 rounded-2xl px-3 py-2 text-center">
-                            <div class="text-[11px] font-bold text-rose-200">🇹🇷 ترکیه</div>
+                            <div id="labelCountryTurkey" class="text-[11px] font-bold text-rose-200">🇹🇷 ترکیه</div>
                             <div id="clockTurkey" class="text-sm sm:text-base font-black text-rose-300 font-mono mt-0.5">--:--:--</div>
+                            <div id="dateCountryTurkey" class="text-[10px] text-rose-200/85 mt-0.5 leading-tight">--</div>
                         </div>
                     </div>
                 </div>
@@ -274,12 +277,15 @@
         </section>
 
         <!-- Compact Footer -->
-        <footer class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-2 text-[11px] text-slate-300/85">
-            <span>تیم فارسی زبانان</span>
-            <button onclick="openAdminAuthModal()" title="ورود اختصاصی مدیر" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-400 hover:text-sky-300 transition">
-                <i class="fa-solid fa-lock text-[10px]" id="footerLockIcon"></i>
-                <span class="text-[10px]">بخش مدیر</span>
-            </button>
+        <footer class="pt-3 flex flex-col items-center justify-center gap-2 text-[11px] text-slate-300/85">
+            <div class="flex flex-wrap items-center justify-center gap-2">
+                <span>تیم فارسی زبانان</span>
+                <button onclick="openAdminAuthModal()" title="ورود اختصاصی مدیر" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-400 hover:text-sky-300 transition">
+                    <i class="fa-solid fa-lock text-[10px]" id="footerLockIcon"></i>
+                    <span class="text-[10px]">بخش مدیر</span>
+                </button>
+            </div>
+            <div id="footerEnglishBrand" dir="ltr" class="text-xs sm:text-sm font-black tracking-wide text-sky-300">🇮🇷FA TEAM 🇦🇫</div>
         </footer>
     </main>
 
@@ -443,7 +449,34 @@
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const IMO_LOGO_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+        
+function createProfileAvatarWithSiteName(siteName) {
+    const cleanName = (siteName && siteName.trim()) ? siteName.trim() : 'تیم فارسی زبانان';
+    const escaped = cleanName
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    const fontSize = escaped.length > 14 ? 26 : (escaped.length > 9 ? 32 : 38);
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+        <defs>
+            <linearGradient id="profGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0284c7"/>
+                <stop offset="50%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="#1d4ed8"/>
+            </linearGradient>
+        </defs>
+        <rect width="400" height="400" fill="url(#profGrad)"/>
+        <circle cx="200" cy="200" r="176" fill="none" stroke="#38bdf8" stroke-width="6" stroke-dasharray="14 8" opacity="0.8"/>
+        <circle cx="200" cy="200" r="158" fill="rgba(9,16,33,0.72)" stroke="#e2e8f0" stroke-width="3"/>
+        <text x="200" y="135" text-anchor="middle" fill="#7dd3fc" font-family="Vazirmatn, sans-serif" font-size="22" font-weight="800">پروفایل رسمی</text>
+        <text x="200" y="212" text-anchor="middle" fill="#ffffff" font-family="Vazirmatn, sans-serif" font-size="${fontSize}" font-weight="900">${escaped}</text>
+        <text x="200" y="268" text-anchor="middle" fill="#fbbf24" font-family="sans-serif" font-size="22" font-weight="800">🇮🇷 FA TEAM 🇦🇫</text>
+    </svg>`;
+    return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+}
+
+const IMO_LOGO_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
                 <rect width="400" height="400" fill="#ffffff"/>
                 <path d="M200 42C112.7 42 42 110.5 42 195c0 35.8 12.7 68.8 34 94.9L56 346l59.6-18.8c24.9 13.3 53.7 20.8 84.4 20.8 87.3 0 158-68.5 158-153S287.3 42 200 42z" fill="none" stroke="#0095ff" stroke-width="26" stroke-linejoin="round"/>
@@ -458,8 +491,13 @@
         const defaultSiteContent = {
             settings: {
                 siteTitle: "تیم فارسی زبانان",
-                profileAvatar: IMO_LOGO_SVG,
+                profileAvatar: "",
+                useAutoSiteNameAvatar: true,
                 heroTitleFa: "تیم فارسی زبانان",
+                footerEnglishTitle: "🇮🇷FA TEAM 🇦🇫",
+                countryAfgName: "🇦🇫 افغانستان",
+                countryIranName: "🇮🇷 ایران",
+                countryTurkeyName: "🇹🇷 ترکیه",
                 meetingText: "روز های چهارشنبه در کانال اف ای جلسه با کاربران اف ای",
                 meetTimeAfg: "7:30",
                 meetTimeIran: "6:30",
@@ -625,21 +663,57 @@
             }, 15 * 60 * 1000);
         }
 
+
+function normalizeCountryLabel(val, fallback) {
+    const t = (val || '').trim();
+    if (!t) return fallback;
+    return t;
+}
+
+function getTimeZoneForCountry(val, defaultTz) {
+    const t = (val || '').toLowerCase();
+    if (t.includes('ایران') || t.includes('iran') || t.includes('tehran') || t.includes('تهران')) return 'Asia/Tehran';
+    if (t.includes('ترکیه') || t.includes('ترکیا') || t.includes('turkey') || t.includes('istanbul') || t.includes('استانبول')) return 'Europe/Istanbul';
+    if (t.includes('افغانستان') || t.includes('afghanistan') || t.includes('kabul') || t.includes('کابل')) return 'Asia/Kabul';
+    return defaultTz;
+}
+
+        function formatCountryDateAndDay(now, tz) {
+            const wk = new Intl.DateTimeFormat('fa-IR', { weekday: 'short', timeZone: tz }).format(now);
+            const dt = new Intl.DateTimeFormat('fa-IR', { month: 'short', day: 'numeric', timeZone: tz }).format(now);
+            return `${wk} · ${dt}`;
+        }
+
         function updateDateAndClocks() {
             const now = new Date();
-            document.getElementById('liveWeekday').innerText = new Intl.DateTimeFormat('fa-IR', { weekday: 'long', timeZone: 'Asia/Kabul' }).format(now);
-            document.getElementById('livePersianDate').innerText = new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kabul' }).format(now);
-            document.getElementById('liveGregorianDate').innerText = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(now);
+            const tzAfg = getTimeZoneForCountry(appData.settings.countryAfgName, 'Asia/Kabul');
+            const tzIran = getTimeZoneForCountry(appData.settings.countryIranName, 'Asia/Tehran');
+            const tzTurkey = getTimeZoneForCountry(appData.settings.countryTurkeyName, 'Europe/Istanbul');
 
-            document.getElementById('clockAfghanistan').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: 'Asia/Kabul', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
-            document.getElementById('clockIran').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
-            document.getElementById('clockTurkey').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: 'Europe/Istanbul', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+            document.getElementById('liveWeekday').innerText = new Intl.DateTimeFormat('fa-IR', { weekday: 'long', timeZone: tzAfg }).format(now);
+            document.getElementById('livePersianDate').innerText = new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: tzAfg }).format(now);
+            document.getElementById('liveGregorianDate').innerText = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: tzAfg }).format(now);
+
+            document.getElementById('clockAfghanistan').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: tzAfg, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+            document.getElementById('clockIran').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: tzIran, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+            document.getElementById('clockTurkey').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: tzTurkey, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+
+            document.getElementById('dateCountryAfg').innerText = formatCountryDateAndDay(now, tzAfg);
+            document.getElementById('dateCountryIran').innerText = formatCountryDateAndDay(now, tzIran);
+            document.getElementById('dateCountryTurkey').innerText = formatCountryDateAndDay(now, tzTurkey);
         }
 
         function renderAll() {
-            document.getElementById('siteTitleNav').innerText = appData.settings.siteTitle;
-            document.getElementById('mainProfileAvatar').src = appData.settings.profileAvatar || IMO_LOGO_SVG;
-            document.getElementById('heroTitleFa').innerText = appData.settings.heroTitleFa;
+            const siteNameVal = appData.settings.siteTitle || appData.settings.heroTitleFa || 'تیم فارسی زبانان';
+            document.getElementById('siteTitleNav').innerText = siteNameVal;
+            const autoAvatar = createProfileAvatarWithSiteName(siteNameVal);
+            const useCustom = appData.settings.useAutoSiteNameAvatar === false && appData.settings.profileAvatar;
+            document.getElementById('mainProfileAvatar').src = useCustom ? appData.settings.profileAvatar : autoAvatar;
+            document.getElementById('heroTitleFa').innerText = appData.settings.heroTitleFa || siteNameVal;
+            document.getElementById('labelCountryAfg').innerText = normalizeCountryLabel(appData.settings.countryAfgName, '🇦🇫 افغانستان');
+            document.getElementById('labelCountryIran').innerText = normalizeCountryLabel(appData.settings.countryIranName, '🇮🇷 ایران');
+            document.getElementById('labelCountryTurkey').innerText = normalizeCountryLabel(appData.settings.countryTurkeyName, '🇹🇷 ترکیه');
+            document.getElementById('footerEnglishBrand').innerText = appData.settings.footerEnglishTitle || '🇮🇷FA TEAM 🇦🇫';
             document.getElementById('meetingBannerText').innerText = appData.settings.meetingText;
             document.getElementById('meetTimeAfg').innerText = appData.settings.meetTimeAfg || '7:30';
             document.getElementById('meetTimeIran').innerText = appData.settings.meetTimeIran || '6:30';
@@ -920,116 +994,4 @@
             setTimeout(() => toast.remove(), 3200);
         }
 
-        window.openAdminAuthModal = async function() {
-            if (isAdminAuthenticated) {
-                openAdminPanel();
-                return;
-            }
-
-            const modal = document.getElementById('adminAuthModal');
-            const setupView = document.getElementById('adminSetupView');
-            const loginView = document.getElementById('adminLoginView');
-
-            setupView.classList.add('hidden');
-            loginView.classList.remove('hidden');
-            modal.classList.remove('hidden');
-
-            checkBruteForceLockout();
-
-            if (db && currentUser) {
-                try {
-                    const credDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'admin_security', 'master_key');
-                    const credSnap = await getDoc(credDocRef);
-                    if (!credSnap.exists() || !credSnap.data().hash) {
-                        loginView.classList.add('hidden');
-                        setupView.classList.remove('hidden');
-                    }
-                } catch (err) {
-                    console.error("Credential check error:", err);
-                }
-            }
-        };
-
-        window.closeAdminAuthModal = function() {
-            document.getElementById('adminAuthModal').classList.add('hidden');
-        };
-
-        window.togglePasswordVisibility = function() {
-            const inp = document.getElementById('adminPasswordInput');
-            const ico = document.getElementById('eyeIcon');
-            inp.type = inp.type === 'password' ? 'text' : 'password';
-            ico.className = inp.type === 'password' ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
-        };
-
-        function checkBruteForceLockout() {
-            const now = Date.now();
-            const lockBox = document.getElementById('lockoutAlertBox');
-            const submitBtn = document.getElementById('loginSubmitBtn');
-            const inputEl = document.getElementById('adminPasswordInput');
-
-            if (lockoutUntilTimestamp > now) {
-                lockBox.classList.remove('hidden');
-                inputEl.disabled = true;
-                submitBtn.disabled = true;
-                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-
-                if (lockoutInterval) clearInterval(lockoutInterval);
-                lockoutInterval = setInterval(() => {
-                    const remainingMs = lockoutUntilTimestamp - Date.now();
-                    if (remainingMs <= 0) {
-                        clearInterval(lockoutInterval);
-                        failedAttempts = 0;
-                        lockoutUntilTimestamp = 0;
-                        lockBox.classList.add('hidden');
-                        inputEl.disabled = false;
-                        submitBtn.disabled = false;
-                        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                        document.getElementById('loginErrorMsg').classList.add('hidden');
-                    } else {
-                        const mins = String(Math.floor(remainingMs / 60000)).padStart(2, '0');
-                        const secs = String(Math.floor((remainingMs % 60000) / 1000)).padStart(2, '0');
-                        document.getElementById('lockoutCountdown').innerText = `${mins}:${secs}`;
-                    }
-                }, 500);
-                return true;
-            }
-            return false;
-        }
-
-        window.handleFirstTimeAdminSetup = async function(e) {
-            e.preventDefault();
-            const newPass = document.getElementById('setupNewPassInput').value.trim();
-            const confirmPass = document.getElementById('setupConfirmPassInput').value.trim();
-            const errEl = document.getElementById('setupErrorMsg');
-            const btn = document.getElementById('setupSubmitBtn');
-
-            errEl.classList.add('hidden');
-
-            if (newPass.length < 6) {
-                errEl.innerText = 'کد محرمانه باید حداقل ۶ کاراکتر باشد.';
-                errEl.classList.remove('hidden');
-                return;
-            }
-            if (newPass !== confirmPass) {
-                errEl.innerText = 'تکرار کد محرمانه مطابقت ندارد!';
-                errEl.classList.remove('hidden');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerText = 'در حال رمزنگاری و ذخیره‌سازی امن...';
-
-            try {
-                const salt = generateCryptoSalt();
-                const hash = await deriveSaltedHash(newPass, salt);
-
-                if (db && currentUser) {
-                    const credDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'admin_security', 'master_key');
-                    await setDoc(credDocRef, { salt: salt, hash: hash, createdAt: Date.now() });
-                }
-
-                document.getElementById('setupNewPassInput').value = '';
-                document.getElementById('setupConfirmPassInput').value = '';
-
-                grantAdminAccess(hash);
-                closeAdminAuthModa
+        window.openAdminAuthModal = async function
