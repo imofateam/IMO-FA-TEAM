@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تیم فارسی زبانان</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #09152b 0%, #1d4ed8 25%, #f1f5f9 50%, #111827 54%, #070b14 100%);
+            background-attachment: fixed;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-6px) scale(1.03); }
+        }
+        @keyframes spinHalo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .avatar-float {
+            animation: floatAvatar 3.5s ease-in-out infinite;
+        }
+        .avatar-halo {
+            animation: spinHalo 8s linear infinite;
+        }
+        .glass-panel {
+            background: rgba(11, 17, 32, 0.90);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .frame-box {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .frame-box:hover {
+            transform: translateY(-4px) scale(1.01);
+        }
+        .frame-box:active {
+            transform: scale(0.98);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="selection:bg-sky-500 selection:text-slate-950 pb-10">
+
+    <!-- Top Compact Navbar -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-white/15">
+        <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping"></span>
+                <span id="siteTitleNav" class="text-xs sm:text-sm font-black text-white">تیم فارسی زبانان</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span id="cloudSyncBadge" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-[10px] font-bold">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>محافظت‌شده</span>
+                </span>
+                <a id="topChannelBtn" href="https://bgroup.imo.im/_3jdAQy23HZw4XULux" target="_blank" class="px-3 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-extrabold transition flex items-center gap-1.5 shadow">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>کانال اف ای</span>
+                </a>
+                <button id="activeAdminPanelBtn" onclick="openAdminPanel()" class="hidden px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black transition flex items-center gap-1.5 shadow">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>پنل مدیریت</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Compact Main Container -->
+    <main class="max-w-5xl mx-auto px-3 sm:px-6 pt-5 space-y-4">
+
+        <!-- TOP PROFILE & CLOCKS FRAME -->
+        <section class="glass-panel rounded-3xl p-4 sm:p-6 border-2 border-sky-400/40 shadow-2xl text-center relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Right/Top: Animated Profile & Title -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
+                    <div class="relative inline-flex items-center justify-center shrink-0 avatar-float">
+                        <div class="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-sky-400 via-white to-blue-600 opacity-85 blur-xs avatar-halo"></div>
+                        <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white p-1 shadow-xl border-2 border-sky-300 overflow-hidden flex items-center justify-center">
+                            <img id="mainProfileAvatar" src="" alt="تیم فارسی زبانان" class="w-full h-full object-contain rounded-full">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-[11px] font-black">
+                            <span>تیم فارسی زبانان</span>
+                        </div>
+                        <h1 id="heroTitleFa" class="text-lg sm:text-2xl font-black text-white leading-tight">
+                            تیم فارسی زبانان
+                        </h1>
+                        <!-- Live Weekday & Date -->
+                        <div class="pt-1 flex flex-wrap items-center justify-center sm:justify-start gap-2 text-[11px] text-amber-200 font-semibold">
+                            <span class="bg-amber-500/15 border border-amber-400/30 px-2 py-0.5 rounded-lg" id="liveWeekday">--</span>
+                            <span id="livePersianDate" class="text-slate-200">--</span>
+                            <span class="text-slate-500">|</span>
+                            <span id="liveGregorianDate" class="text-slate-400 font-mono">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left/Bottom: Medium World Clocks -->
+                <div class="w-full md:w-auto shrink-0">
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="bg-blue-950/80 border border-blue-400/35 rounded-2xl px-3 py-2 text-center">
+                            <div class="text-[11px] font-bold text-blue-200">🇦🇫 افغانستان</div>
+                            <div id="clockAfghanistan" class="text-sm sm:text-base font-black text-sky-300 font-mono mt-0.5">--:--:--</div>
+                        </div>
+                        <div class="bg-slate-900/90 border border-white/25 rounded-2xl px-3 py-2 text-center">
+                            <div class="text-[11px] font-bold text-slate-200">🇮🇷 ایران</div>
+                            <div id="clockIran" class="text-sm sm:text-base font-black text-white font-mono mt-0.5">--:--:--</div>
+                        </div>
+                        <div class="bg-rose-950/80 border border-rose-400/35 rounded-2xl px-3 py-2 text-center">
+                            <div class="text-[11px] font-bold text-rose-200">🇹🇷 ترکیه</div>
+                            <div id="clockTurkey" class="text-sm sm:text-base font-black text-rose-300 font-mono mt-0.5">--:--:--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compact Wednesday Meeting Strip inside Top Frame (Updated times) -->
+            <div class="mt-4 pt-3 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
+                <div class="flex items-center gap-2 text-amber-200 font-bold">
+                    <i class="fa-solid fa-calendar-check text-amber-400 text-sm"></i>
+                    <span id="meetingBannerText">روز های چهارشنبه در کانال اف ای جلسه با کاربران اف ای</span>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-2 font-mono text-[11px]">
+                    <span class="px-2 py-0.5 rounded-lg bg-blue-950 border border-blue-400/30 text-sky-200">🇦🇫 <strong id="meetTimeAfg">7:30</strong> شام</span>
+                    <span class="px-2 py-0.5 rounded-lg bg-slate-800 border border-white/20 text-white">🇮🇷 <strong id="meetTimeIran">6:30</strong> شام</span>
+                    <span class="px-2 py-0.5 rounded-lg bg-rose-950 border border-rose-400/30 text-rose-200">🇹🇷 <strong id="meetTimeTurkey">6:00</strong> شام</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPACT 6-BOX GRID -->
+        <section class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+
+            <!-- BOX 1: SVIP Officials -->
+            <button onclick="openSectionModal('svip')" class="frame-box text-right rounded-3xl bg-gradient-to-br from-blue-950/90 via-slate-900/95 to-sky-900/85 border-2 border-sky-400/55 p-4 sm:p-5 shadow-xl flex flex-col justify-between group cursor-pointer">
+                <div class="flex items-center justify-between w-full mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-300 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <span id="badgeCountSvip" class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">3 نفر</span>
+                </div>
+                <div>
+                    <h2 class="text-sm sm:text-base font-black text-white group-hover:text-sky-300 transition">افیشل های تیم فارسی</h2>
+                    <p class="text-[11px] text-sky-200/75 mt-1">مشاهده لیست SVIPها و کپی آیدی</p>
+                </div>
+                <div class="mt-3 pt-2.5 border-t border-sky-400/20 flex items-center justify-between text-[11px] font-bold text-sky-300 w-full">
+                    <span>باز کردن چهارچوکات</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
+                </div>
+            </button>
+
+            <!-- BOX 2: Assistants & Feedback -->
+            <button onclick="openSectionModal('assistants')" class="frame-box text-right rounded-3xl bg-gradient-to-br from-emerald-950/90 via-slate-900/95 to-teal-900/85 border-2 border-emerald-400/55 p-4 sm:p-5 shadow-xl flex flex-col justify-between group cursor-pointer">
+                <div class="flex items-center justify-between w-full mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <span id="badgeCountAssistants" class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">5 دستیار</span>
+                </div>
+                <div>
+                    <h2 class="text-sm sm:text-base font-black text-white group-hover:text-emerald-300 transition">ارتباط با دستیاران</h2>
+                    <p class="text-[11px] text-emerald-200/75 mt-1">پیشنهاد، انتقاد، نظریه و لینک‌ها</p>
+                </div>
+                <div class="mt-3 pt-2.5 border-t border-emerald-400/20 flex items-center justify-between text-[11px] font-bold text-emerald-300 w-full">
+                    <span>باز کردن چهارچوکات</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
+                </div>
+            </button>
+
+            <!-- BOX 3: Merchants -->
+            <button onclick="openSectionModal('merchants')" class="frame-box text-right rounded-3xl bg-gradient-to-br from-purple-950/90 via-slate-900/95 to-indigo-900/85 border-2 border-purple-400/55 p-4 sm:p-5 shadow-xl flex flex-col justify-between group cursor-pointer">
+                <div class="flex items-center justify-between w-full mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <span id="badgeCountMerchants" class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30">4 مرچنت</span>
+                </div>
+                <div>
+                    <h2 class="text-sm sm:text-base font-black text-white group-hover:text-purple-300 transition">مرچنت های بخش فارسی</h2>
+                    <p class="text-[11px] text-purple-200/75 mt-1">فروشندگان رسمی الماس و آیدی‌ها</p>
+                </div>
+                <div class="mt-3 pt-2.5 border-t border-purple-400/20 flex items-center justify-between text-[11px] font-bold text-purple-300 w-full">
+                    <span>باز کردن چهارچوکات</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
+                </div>
+            </button>
+
+            <!-- BOX 4: Seller Rules & Important Info -->
+            <button onclick="openSectionModal('rules')" class="frame-box text-right rounded-3xl bg-gradient-to-br from-amber-950/90 via-slate-900/95 to-orange-900/85 border-2 border-amber-400/55 p-4 sm:p-5 shadow-xl flex flex-col justify-between group cursor-pointer">
+                <div class="flex items-center justify-between w-full mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <span class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30">قوانین</span>
+                </div>
+                <div>
+                    <h2 class="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition">شرایط فروشنده رسمی</h2>
+                    <p class="text-[11px] text-amber-200/75 mt-1">قوانین فروشندگی، پیش‌پرداخت و مدال</p>
+                </div>
+                <div class="mt-3 pt-2.5 border-t border-amber-400/20 flex items-center justify-between text-[11px] font-bold text-amber-300 w-full">
+                    <span>باز کردن چهارچوکات</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
+                </div>
+            </button>
+
+            <!-- BOX 5: Security Alert & Official Badges -->
+            <button onclick="openSectionModal('security')" class="frame-box text-right rounded-3xl bg-gradient-to-br from-rose-950/95 via-slate-900/95 to-red-900/85 border-2 border-rose-500/65 p-4 sm:p-5 shadow-xl flex flex-col justify-between group cursor-pointer">
+                <div class="flex items-center justify-between w-full mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-rose-500/20 border border-rose-400/50 flex items-center justify-center text-rose-400 text-xl animate-pulse">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <span class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-rose-500/25 text-rose-200 border border-rose-400/40">هشدار مهم</span>
+                </div>
+                <div>
+                    <h2 class="text-sm sm:text-base font-black text-white group-hover:text-rose-300 transition">هشدار امنیتی و مدال‌ها</h2>
+                    <p class="text-[11px] text-rose-200/80 mt-1">تشخیص افیشل و دستیار واقعی از کلاهبردار</p>
+                </div>
+                <div class="mt-3 pt-2.5 border-t border-rose-500/25 flex items-center justify-between text-[11px] font-bold text-rose-300 w-full">
+                    <span>مشاهده مدال‌ها و هشدار</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
+                </div>
+            </button>
+
+            <!-- BOX 6: Official Channels & Groups -->
+            <button onclick="openSectionModal('channels')" class="frame-box text-right rounded-3xl bg-gradient-to-br from-cyan-950/90 via-slate-900/95 to-blue-900/85 border-2 border-cyan-400/55 p-4 sm:p-5 shadow-xl flex flex-col justify-between group cursor-pointer">
+                <div class="flex items-center justify-between w-full mb-3">
+                    <div class="w-11 h-11 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                    </div>
+                    <span id="badgeCountChannels" class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">6 لینک</span>
+                </div>
+                <div>
+                    <h2 class="text-sm sm:text-base font-black text-white group-hover:text-cyan-300 transition">کانال و گروه‌های تیم</h2>
+                    <p class="text-[11px] text-cyan-200/75 mt-1">لینک مستقیم کانال اف ای و گروه‌ها</p>
+                </div>
+                <div class="mt-3 pt-2.5 border-t border-cyan-400/20 flex items-center justify-between text-[11px] font-bold text-cyan-300 w-full">
+                    <span>باز کردن چهارچوکات</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
+                </div>
+            </button>
+
+        </section>
+
+        <!-- Compact Footer -->
+        <footer class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-2 text-[11px] text-slate-300/85">
+            <span>تیم فارسی زبانان</span>
+            <button onclick="openAdminAuthModal()" title="ورود اختصاصی مدیر" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-400 hover:text-sky-300 transition">
+                <i class="fa-solid fa-lock text-[10px]" id="footerLockIcon"></i>
+                <span class="text-[10px]">بخش مدیر</span>
+            </button>
+        </footer>
+    </main>
+
+    <!-- ================= DYNAMIC SECTION DETAILS MODAL ================= -->
+    <div id="sectionDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/80 backdrop-blur-md hidden">
+        <div id="sectionModalBox" class="glass-panel w-full max-w-3xl max-h-[88vh] rounded-3xl border-2 border-sky-400/40 shadow-2xl flex flex-col overflow-hidden">
+            <div class="p-4 sm:p-5 border-b border-white/15 flex items-center justify-between bg-slate-950/70">
+                <div class="flex items-center gap-3">
+                    <div id="sectionModalIcon" class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div>
+                        <h3 id="sectionModalTitle" class="text-base sm:text-lg font-black text-white">عنوان بخش</h3>
+                        <p id="sectionModalSubtitle" class="text-xs text-slate-400">جزئیات کامل</p>
+                    </div>
+                </div>
+                <button onclick="closeSectionModal()" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-rose-600 text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="sectionModalBody" class="p-4 sm:p-6 overflow-y-auto space-y-4"></div>
+        </div>
+    </div>
+
+    <!-- ================= ASSISTANT FEEDBACK SUB-MODAL ================= -->
+    <div id="feedbackModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-6 border-2 border-emerald-400/40 shadow-2xl relative">
+            <button onclick="closeFeedbackModal()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-5">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-500 mx-auto flex items-center justify-center text-slate-950 text-2xl shadow-lg mb-2.5">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h4 id="modalAssistantName" class="text-lg font-black text-white">نام دستیار</h4>
+                <p class="text-xs text-emerald-300 mt-1">یکی از گزینه‌های زیر را انتخاب کنید</p>
+            </div>
+
+            <div class="space-y-2.5">
+                <button onclick="selectFeedbackOption('پیشنهاد')" class="w-full flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/90 border border-sky-400/30 hover:border-sky-400 text-right transition group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-white block text-sm">پیشنهاد</span>
+                            <span class="text-[11px] text-slate-400">ارسال ایده یا پیشنهاد سازنده</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-left text-slate-500 group-hover:text-sky-400"></i>
+                </button>
+
+                <button onclick="selectFeedbackOption('انتقاد')" class="w-full flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/90 border border-rose-400/30 hover:border-rose-400 text-right transition group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-white block text-sm">انتقاد</span>
+                            <span class="text-[11px] text-slate-400">گزارش مشکل یا انتقاد</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-left text-slate-500 group-hover:text-rose-400"></i>
+                </button>
+
+                <button onclick="selectFeedbackOption('نظریه')" class="w-full flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/90 border border-purple-400/30 hover:border-purple-400 text-right transition group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-white block text-sm">نظریه</span>
+                            <span class="text-[11px] text-slate-400">ثبت نظر و دیدگاه شخصی</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-left text-slate-500 group-hover:text-purple-400"></i>
+                </button>
+            </div>
+
+            <div class="mt-5 pt-4 border-t border-white/15 flex gap-2">
+                <a id="modalDirectProfile" href="#" target="_blank" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-center text-xs font-bold text-white transition">
+                    <i class="fa-solid fa-user ml-1"></i> پروفایل دستیار
+                </a>
+                <a id="modalCallGroup" href="#" target="_blank" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-center text-xs font-bold text-white transition">
+                    <i class="fa-solid fa-phone ml-1"></i> کال گروه
+                </a>
+                <a id="modalAssistantGroup" href="#" target="_blank" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-center text-xs font-bold text-white transition hidden">
+                    <i class="fa-solid fa-users ml-1"></i> گروه دستیار
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= HARDENED CRYPTOGRAPHIC ADMIN AUTH MODAL ================= -->
+    <div id="adminAuthModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-6 sm:p-8 border-2 border-sky-500/40 shadow-2xl relative">
+            <button onclick="closeAdminAuthModal()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- First-Time Master Setup View -->
+            <div id="adminSetupView" class="hidden">
+                <div class="text-center mb-5">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-400/40 mx-auto flex items-center justify-center text-amber-400 text-2xl mb-3">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <h4 class="text-lg font-black text-white">تنظیم کد امنیتی مدیر کل</h4>
+                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">برای اولین بار، یک کد عبور قوی و محرمانه تعیین کنید.</p>
+                </div>
+                <form onsubmit="handleFirstTimeAdminSetup(event)" class="space-y-3.5">
+                    <input type="password" id="setupNewPassInput" required minlength="6" placeholder="کد محرمانه جدید مدیر (حداقل ۶ کاراکتر)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+                    <input type="password" id="setupConfirmPassInput" required minlength="6" placeholder="تکرار کد محرمانه مدیر" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+                    <div id="setupErrorMsg" class="text-xs text-rose-400 hidden text-center font-bold"></div>
+                    <button type="submit" id="setupSubmitBtn" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm transition">
+                        ثبت دائمی کد امنیتی و ورود
+                    </button>
+                </form>
+            </div>
+
+            <!-- Standard Login View -->
+            <div id="adminLoginView">
+                <div class="text-center mb-6">
+                    <div class="w-14 h-14 rounded-2xl bg-sky-500/15 border border-sky-400/30 mx-auto flex items-center justify-center text-sky-400 text-2xl mb-3">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h4 class="text-lg font-black text-white">احراز هویت امنیتی مدیر</h4>
+                    <p class="text-xs text-slate-400 mt-1">دسترسی فقط برای مدیر کل سایت مجاز است</p>
+                </div>
+
+                <div id="lockoutAlertBox" class="hidden mb-4 p-3.5 rounded-2xl bg-rose-950/90 border border-rose-500 text-center space-y-1">
+                    <div class="text-rose-300 font-black text-xs flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-ban"></i>
+                        <span>هشدار امنیتی: ورود موقتاً مسدود شد!</span>
+                    </div>
+                    <p class="text-[11px] text-rose-200/90">به دلیل ۳ بار تلاش ناموفق، دسترسی به مدت <span id="lockoutCountdown" class="font-mono font-black text-white">05:00</span> قفل گردید.</p>
+                </div>
+
+                <form id="adminLoginForm" onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div class="relative">
+                        <input type="password" id="adminPasswordInput" autocomplete="off" placeholder="کد محرمانه مدیر را وارد کنید" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-500">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute left-3 top-3.5 text-slate-400 hover:text-white">
+                            <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                    <div id="loginErrorMsg" class="text-xs text-rose-400 hidden text-center font-bold"></div>
+                    <button type="submit" id="loginSubmitBtn" class="w-full py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-black text-sm transition">
+                        تایید کد و ورود به پنل
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= DYNAMIC ADMIN DASHBOARD CONTAINER ================= -->
+    <div id="adminDashboardRoot"></div>
+
+    <!-- Firebase SDK & Security Engine -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const IMO_LOGO_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+                <rect width="400" height="400" fill="#ffffff"/>
+                <path d="M200 42C112.7 42 42 110.5 42 195c0 35.8 12.7 68.8 34 94.9L56 346l59.6-18.8c24.9 13.3 53.7 20.8 84.4 20.8 87.3 0 158-68.5 158-153S287.3 42 200 42z" fill="none" stroke="#0095ff" stroke-width="26" stroke-linejoin="round"/>
+                <circle cx="116" cy="144" r="15" fill="#0095ff"/>
+                <rect x="103" y="172" width="26" height="82" rx="13" fill="#0095ff"/>
+                <path d="M150 254v-52c0-18 13-31 30-31 12 0 22 6 27 15 6-9 16-15 28-15 18 0 31 13 31 31v52h-25v-49c0-8-5-13-12-13s-12 5-12 13v49h-24v-49c0-8-5-13-12-13s-12 5-12 13v49h-25z" fill="#0095ff"/>
+                <circle cx="305" cy="213" r="34" fill="none" stroke="#0095ff" stroke-width="23"/>
+            </svg>
+        `);
+
+        // Default Content with Updated Wednesday Meeting Times & Persian-only title
+        const defaultSiteContent = {
+            settings: {
+                siteTitle: "تیم فارسی زبانان",
+                profileAvatar: IMO_LOGO_SVG,
+                heroTitleFa: "تیم فارسی زبانان",
+                meetingText: "روز های چهارشنبه در کانال اف ای جلسه با کاربران اف ای",
+                meetTimeAfg: "7:30",
+                meetTimeIran: "6:30",
+                meetTimeTurkey: "6:00"
+            },
+            svip: [
+                { name: "SVIP - FA Region (مها)", accountId: "469800077" },
+                { name: "SVIP FA Region - آیـــلا", accountId: "664808035" },
+                { name: "SVIP - FA Region - [玫瑰]Leli[玫瑰]", accountId: "664810228" }
+            ],
+            assistants: [
+                { name: "کینگ اسد", profile: "https://s.imoim.net/d2CHr8", callGroup: "https://go.imoim.net/APV9m0?t=1", group: "https://bgroup.imo.im/_3NZkywnPA3t6R9Xwy" },
+                { name: "پیمان", profile: "https://s.imoim.net/hnrKuk", callGroup: "https://go.imoim.net/1N1CzH?t=1", group: "https://bgroup.imo.im/_3qhrw3sWzykyxnOqn" },
+                { name: "شوخ ملگری", profile: "https://s.imoim.net/txFlyv", callGroup: "https://go.imoim.net/m6ZhqQ?t=1", group: "https://bgroup.imo.im/_3BK4Ds27bTeMvTT8V" },
+                { name: "فرزاد", profile: "https://s.imoim.net/Zo998L", callGroup: "https://go.imoim.net/IjsTl?t=1", group: "https://bgroup.imo.im/_3p8alcQAIaCDDFCRw" },
+                { name: "سارا", profile: "https://s.imoim.net/KAUxJ6", callGroup: "", group: "https://bgroup.imo.im/_3556OQNrsDTqrpilP" }
+            ],
+            merchants: [
+                { name: "ادیب افغان", accountId: "486187523", link: "https://s.imoim.net/X0vL32" },
+                { name: "مجید داشگر", accountId: "410510964", link: "https://s.imoim.net/7OIGQv" },
+                { name: "حامی", accountId: "306229506", link: "https://s.imoim.net/UGApDj" },
+                { name: "PAMIR-DIAMOND", accountId: "498146537", link: "https://s.imoim.net/xoctuE" }
+            ],
+            merchantRules: [
+                "داشتن کارت هویت",
+                "داشتن کارت بانکی",
+                "داشتن فروشات بالا در ماه",
+                "نداشتن ارتباط با مرچنت های دیگر بخش"
+            ],
+            merchantNote: "برای پیش بردن کار فروشنده گی پیش پرداخت لازم میباشد زمانیکه کاربر مدال دریافت میکند از طرف مرچنت پول پیش پرداخت دوباره به اکانت فروشنده الماس فرستاده میشود برای جزییات بیشتر با دستیار های تیم ارتباط بگیرید.",
+            channels: [
+                { title: "کانال رسمی اف ای (FA)", url: "https://bgroup.imo.im/_3jdAQy23HZw4XULux" },
+                { title: "گروه دستیار: کینگ اسد", url: "https://bgroup.imo.im/_3NZkywnPA3t6R9Xwy" },
+                { title: "گروه دستیار: پیمان", url: "https://bgroup.imo.im/_3qhrw3sWzykyxnOqn" },
+                { title: "گروه دستیار: فرزاد", url: "https://bgroup.imo.im/_3p8alcQAIaCDDFCRw" },
+                { title: "گروه دستیار: شوخ ملگری", url: "https://bgroup.imo.im/_3BK4Ds27bTeMvTT8V" },
+                { title: "گروه دستیار: سارا", url: "https://bgroup.imo.im/_3556OQNrsDTqrpilP" }
+            ]
+        };
+
+        let appData = JSON.parse(JSON.stringify(defaultSiteContent));
+        let isAdminAuthenticated = false;
+        let activeAdminTokenHash = null;
+        let currentActiveAssistant = null;
+        let activeModalSection = null;
+        let inactivityTimer = null;
+        let failedAttempts = 0;
+        let lockoutUntilTimestamp = 0;
+        let lockoutInterval = null;
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'fa-team-portal';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+
+        async function deriveSaltedHash(plainPassword, saltHex) {
+            const encoder = new TextEncoder();
+            const payload = encoder.encode(`${saltHex}::FA_TEAM_SECURE_V2::${plainPassword}`);
+            const digestBuffer = await crypto.subtle.digest('SHA-256', payload);
+            return Array.from(new Uint8Array(digestBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function generateCryptoSalt() {
+            const arr = new Uint8Array(16);
+            crypto.getRandomValues(arr);
+            return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function initCloudSecurity() {
+            if (!firebaseConfig) return;
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                currentUser = auth.currentUser;
+                if (!currentUser) return;
+
+                const contentDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+                onSnapshot(contentDocRef, async (snapshot) => {
+                    if (snapshot.exists()) {
+                        const cloudData = snapshot.data();
+                        if (cloudData && cloudData.payload) {
+                            try {
+                                const parsed = JSON.parse(cloudData.payload);
+                                appData = { ...defaultSiteContent, ...parsed };
+                                if (!appData.settings.profileAvatar) {
+                                    appData.settings.profileAvatar = IMO_LOGO_SVG;
+                                }
+                                renderAll();
+                            } catch (e) {
+                                console.error("Parse error:", e);
+                            }
+                        }
+                    } else {
+                        await setDoc(contentDocRef, {
+                            payload: JSON.stringify(defaultSiteContent),
+                            updatedAt: Date.now()
+                        });
+                    }
+                }, (err) => {
+                    console.error("Firestore read listener error:", err);
+                });
+            } catch (err) {
+                console.error("Firebase init error:", err);
+            }
+        }
+
+        async function persistSiteContentToCloud() {
+            if (!isAdminAuthenticated || !activeAdminTokenHash) {
+                showToast('خطای امنیتی: دسترسی غیرمجاز مسدود شد!');
+                return false;
+            }
+            renderAll();
+            if (!db || !currentUser) return true;
+
+            try {
+                const credDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'admin_security', 'master_key');
+                const credSnap = await getDoc(credDocRef);
+                if (!credSnap.exists() || credSnap.data().hash !== activeAdminTokenHash) {
+                    lockAdminSession('نشست مدیریتی نامعتبر تشخیص داده شد.');
+                    return false;
+                }
+
+                const contentDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'site_config', 'main');
+                await setDoc(contentDocRef, {
+                    payload: JSON.stringify(appData),
+                    updatedAt: Date.now()
+                });
+                return true;
+            } catch (err) {
+                console.error("Cloud save error:", err);
+                showToast('خطا در ذخیره‌سازی ابری!');
+                return false;
+            }
+        }
+
+        window.addEventListener('load', () => {
+            renderAll();
+            updateDateAndClocks();
+            setInterval(updateDateAndClocks, 1000);
+            initCloudSecurity();
+        });
+
+        ['click', 'keydown', 'mousemove', 'touchstart'].forEach(evt => {
+            document.addEventListener(evt, () => {
+                if (isAdminAuthenticated) resetInactivityTimer();
+            });
+        });
+
+        function resetInactivityTimer() {
+            if (inactivityTimer) clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (isAdminAuthenticated) {
+                    lockAdminSession('به دلیل عدم فعالیت به مدت ۱۵ دقیقه، پنل مدیریت به صورت خودکار قفل شد.');
+                }
+            }, 15 * 60 * 1000);
+        }
+
+        function updateDateAndClocks() {
+            const now = new Date();
+            document.getElementById('liveWeekday').innerText = new Intl.DateTimeFormat('fa-IR', { weekday: 'long', timeZone: 'Asia/Kabul' }).format(now);
+            document.getElementById('livePersianDate').innerText = new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kabul' }).format(now);
+            document.getElementById('liveGregorianDate').innerText = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(now);
+
+            document.getElementById('clockAfghanistan').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: 'Asia/Kabul', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+            document.getElementById('clockIran').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: 'Asia/Tehran', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+            document.getElementById('clockTurkey').innerText = new Intl.DateTimeFormat('fa-IR', { timeZone: 'Europe/Istanbul', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+        }
+
+        function renderAll() {
+            document.getElementById('siteTitleNav').innerText = appData.settings.siteTitle;
+            document.getElementById('mainProfileAvatar').src = appData.settings.profileAvatar || IMO_LOGO_SVG;
+            document.getElementById('heroTitleFa').innerText = appData.settings.heroTitleFa;
+            document.getElementById('meetingBannerText').innerText = appData.settings.meetingText;
+            document.getElementById('meetTimeAfg').innerText = appData.settings.meetTimeAfg || '7:30';
+            document.getElementById('meetTimeIran').innerText = appData.settings.meetTimeIran || '6:30';
+            document.getElementById('meetTimeTurkey').innerText = appData.settings.meetTimeTurkey || '6:00';
+
+            const mainChanUrl = appData.channels.length > 0 ? appData.channels[0].url : 'https://bgroup.imo.im/_3jdAQy23HZw4XULux';
+            document.getElementById('topChannelBtn').href = mainChanUrl;
+
+            document.getElementById('badgeCountSvip').innerText = appData.svip.length + ' نفر';
+            document.getElementById('badgeCountAssistants').innerText = appData.assistants.length + ' دستیار';
+            document.getElementById('badgeCountMerchants').innerText = appData.merchants.length + ' مرچنت';
+            document.getElementById('badgeCountChannels').innerText = appData.channels.length + ' لینک';
+
+            if (activeModalSection) openSectionModal(activeModalSection);
+            if (isAdminAuthenticated && document.getElementById('adminPanelModal')) renderAdminTables();
+        }
+
+        window.openSectionModal = function(sectionKey) {
+            activeModalSection = sectionKey;
+            const modal = document.getElementById('sectionDetailsModal');
+            const box = document.getElementById('sectionModalBox');
+            const iconBox = document.getElementById('sectionModalIcon');
+            const titleEl = document.getElementById('sectionModalTitle');
+            const subEl = document.getElementById('sectionModalSubtitle');
+            const bodyEl = document.getElementById('sectionModalBody');
+
+            bodyEl.innerHTML = '';
+
+            if (sectionKey === 'svip') {
+                box.className = 'glass-panel w-full max-w-3xl max-h-[88vh] rounded-3xl border-2 border-sky-400/55 shadow-2xl flex flex-col overflow-hidden';
+                iconBox.className = 'w-10 h-10 rounded-xl bg-sky-500/20 text-sky-300 flex items-center justify-center text-lg';
+                iconBox.innerHTML = '<i class="fa-solid fa-crown"></i>';
+                titleEl.innerText = 'افیشل های تیم فارسی زبان';
+                subEl.innerText = 'مدیران و اسویپ‌های رسمی بخش فارسی';
+
+                let gridHtml = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">';
+                appData.svip.forEach(item => {
+                    gridHtml += `
+                        <div class="bg-slate-900/90 p-4 rounded-2xl border border-sky-400/35 flex flex-col justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center text-white shrink-0">
+                                    <i class="fa-solid fa-crown"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">${escapeHtml(item.name)}</h4>
+                                    <span class="text-xs text-sky-300 font-mono">ID: ${escapeHtml(item.accountId)}</span>
+                                </div>
+                            </div>
+                            <button onclick="copyToClipboard('${escapeHtml(item.accountId)}')" class="w-full py-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 text-xs font-bold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-regular fa-copy"></i> کپی آیدی اکانت
+                            </button>
+                        </div>
+                    `;
+                });
+                gridHtml += '</div>';
+                bodyEl.innerHTML = gridHtml;
+            }
+            else if (sectionKey === 'assistants') {
+                box.className = 'glass-panel w-full max-w-3xl max-h-[88vh] rounded-3xl border-2 border-emerald-400/55 shadow-2xl flex flex-col overflow-hidden';
+                iconBox.className = 'w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-lg';
+                iconBox.innerHTML = '<i class="fa-solid fa-headset"></i>';
+                titleEl.innerText = 'دستیاران تیم فارسی زبان';
+                subEl.innerText = 'روی نام هر دستیار کلیک کنید تا گزینه‌های پیشنهاد، انتقاد و نظریه باز شود';
+
+                let gridHtml = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">';
+                appData.assistants.forEach((ast, index) => {
+                    const hasCallGroup = ast.callGroup && ast.callGroup.trim() !== '';
+                    gridHtml += `
+                        <div class="bg-slate-900/90 p-4 rounded-2xl border border-emerald-400/35 flex flex-col justify-between gap-3">
+                            <div class="flex items-center justify-between">
+                                <button onclick="openFeedbackModal(${index})" class="flex items-center gap-2.5 text-right group">
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center text-slate-950 font-bold">
+                                        <i class="fa-solid fa-headset"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-black text-white text-base group-hover:text-emerald-300 transition">${escapeHtml(ast.name)}</h4>
+                                        <span class="text-[11px] text-emerald-300">کلیک جهت ثبت نظر / پیشنهاد</span>
+                                    </div>
+                                </button>
+                            </div>
+                            <button onclick="openFeedbackModal(${index})" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-comments"></i> پیشنهاد / انتقاد / نظریه
+                            </button>
+                            <div class="flex gap-1.5">
+                                <a href="${escapeHtml(ast.profile)}" target="_blank" class="flex-1 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-center text-[11px] text-emerald-200 font-semibold">پروفایل</a>
+                                ${hasCallGroup ? `<a href="${escapeHtml(ast.callGroup)}" target="_blank" class="flex-1 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-center text-[11px] text-emerald-200 font-semibold">کال گروه</a>` : ''}
+                                <a href="${escapeHtml(ast.group)}" target="_blank" class="flex-1 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-center text-[11px] text-emerald-200 font-semibold">گروه دستیار</a>
+                            </div>
+                        </div>
+                    `;
+                });
+                gridHtml += '</div>';
+                bodyEl.innerHTML = gridHtml;
+            }
+            else if (sectionKey === 'merchants') {
+                box.className = 'glass-panel w-full max-w-3xl max-h-[88vh] rounded-3xl border-2 border-purple-400/55 shadow-2xl flex flex-col overflow-hidden';
+                iconBox.className = 'w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-lg';
+                iconBox.innerHTML = '<i class="fa-solid fa-gem"></i>';
+                titleEl.innerText = 'مرچنت های بخش فارسی زبان';
+                subEl.innerText = 'فروشندگان رسمی و معتبر الماس در تیم فارسی زبانان';
+
+                let gridHtml = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">';
+                appData.merchants.forEach(mer => {
+                    gridHtml += `
+                        <div class="bg-slate-900/90 p-4 rounded-2xl border border-purple-400/35 flex flex-col justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/25 text-purple-300 flex items-center justify-center">
+                                    <i class="fa-solid fa-gem"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">${escapeHtml(mer.name)}</h4>
+                                    <span class="text-xs text-purple-300 font-mono">ID: ${escapeHtml(mer.accountId)}</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <a href="${escapeHtml(mer.link)}" target="_blank" class="flex-1 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-center text-xs font-bold transition">لینک اکانت</a>
+                                <button onclick="copyToClipboard('${escapeHtml(mer.accountId)}')" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-purple-200 text-xs font-bold transition">کپی آیدی</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                gridHtml += '</div>';
+                bodyEl.innerHTML = gridHtml;
+            }
+            else if (sectionKey === 'rules') {
+                box.className = 'glass-panel w-full max-w-2xl max-h-[88vh] rounded-3xl border-2 border-amber-400/55 shadow-2xl flex flex-col overflow-hidden';
+                iconBox.className = 'w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg';
+                iconBox.innerHTML = '<i class="fa-solid fa-file-contract"></i>';
+                titleEl.innerText = 'قوانین و شرایط فروشنده رسمی شدن';
+                subEl.innerText = 'معلومات کامل برای متقاضیان فروشندگی الماس';
+
+                let rulesHtml = appData.merchantRules.map(r => `
+                    <li class="flex items-center gap-2.5 bg-slate-900/90 border border-amber-400/25 p-3 rounded-xl text-sm text-white">
+                        <i class="fa-solid fa-circle-check text-amber-400"></i>
+                        <span>${escapeHtml(r)}</span>
+                    </li>
+                `).join('');
+
+                bodyEl.innerHTML = `
+                    <ul class="space-y-2.5">${rulesHtml}</ul>
+                    <div class="p-4 rounded-2xl bg-amber-500/15 border border-amber-400/40 text-xs sm:text-sm text-amber-100 leading-relaxed">
+                        <strong class="text-amber-300 block mb-1"><i class="fa-solid fa-triangle-exclamation ml-1"></i> یاداشت مهم:</strong>
+                        ${escapeHtml(appData.merchantNote)}
+                    </div>
+                `;
+            }
+            else if (sectionKey === 'security') {
+                box.className = 'glass-panel w-full max-w-3xl max-h-[88vh] rounded-3xl border-2 border-rose-500/65 shadow-2xl flex flex-col overflow-hidden';
+                iconBox.className = 'w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-lg';
+                iconBox.innerHTML = '<i class="fa-solid fa-shield-virus"></i>';
+                titleEl.innerText = 'هشدار امنیتی و تشخیص مدال‌های رسمی';
+                subEl.innerText = 'پشت اکانت و مدال‌های رسمی را حتماً چک کنید';
+
+                bodyEl.innerHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-900/95 rounded-2xl p-4 border border-sky-400/40 flex flex-col items-center text-center gap-3">
+                            <div class="w-24 h-24 rounded-2xl bg-black border border-sky-400/30 flex flex-col items-center justify-center p-2">
+                                <svg viewBox="0 0 120 120" class="w-14 h-14">
+                                    <path d="M60 8 L73 16 L88 15 L95 28 L108 35 L107 50 L115 63 L107 76 L108 91 L95 98 L88 111 L73 110 L60 118 L47 110 L32 111 L25 98 L12 91 L13 76 L5 63 L13 50 L12 35 L25 28 L32 15 L47 16 Z" fill="#3b82f6" stroke="#dbeafe" stroke-width="3"/>
+                                    <path d="M40 62 L54 76 L82 46" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="text-[9px] font-serif italic font-bold text-white mt-1">imo Official</span>
+                            </div>
+                            <h4 class="text-sm font-black text-sky-300">مدال افیشل تیم (imo Official)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">هر کس که در پشت اکانت خود این مدال آبی تیک‌دار را داشته باشد افیشل ایمو می‌باشد.</p>
+                        </div>
+
+                        <div class="bg-slate-900/95 rounded-2xl p-4 border border-rose-400/40 flex flex-col items-center text-center gap-3">
+                            <div class="w-24 h-24 rounded-2xl bg-black border border-rose-400/30 flex flex-col items-center justify-center p-2">
+                                <svg viewBox="0 0 120 120" class="w-14 h-14">
+                                    <polygon points="60,8 97,23 112,60 97,97 60,112 23,97 8,60 23,23" fill="#f43f5e" stroke="#ffe4e6" stroke-width="3.5"/>
+                                    <circle cx="60" cy="43" r="11" fill="#ffffff"/>
+                                    <path d="M38 82 C38 66, 82 66, 82 82 Z" fill="#ffffff"/>
+                                    <polygon points="60,64 56,74 60,82 64,74" fill="#f43f5e"/>
+                                </svg>
+                                <span class="text-[8px] font-serif italic font-bold text-white mt-1">imo Official Assistant</span>
+                            </div>
+                            <h4 class="text-sm font-black text-rose-300">مدال دستیار تیم (Official Assistant)</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">هر شخص که در پشت اکانت خود این مدال را داشته باشد دستیار رسمی تیم فارسی زبانان می‌باشد.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-rose-950/60 border border-rose-500/40 rounded-2xl p-4 space-y-2.5 text-xs">
+                        <p class="font-bold text-amber-300">⚠️ هشدار: کسانیکه از اسم افیشل و دستیار های تیم سوءاستفاده می‌کنند بیشتر شده‌اند، متوجه باشید!</p>
+                        <ul class="space-y-1.5 text-slate-100">
+                            <li>❌ افیشل تیم برای هیچ کسی مدال ارسال نمی‌کند.</li>
+                            <li>❌ افیشل های تیم برای هیچ کسی الماس ارسال نمی‌کند.</li>
+                            <li>❌ افیشل های تیم نیاز به اکانت های شما ندارد.</li>
+                            <li>❌ افیشل های تیم از هیچ کسی تقاضای پول و اکانت نمی‌کند.</li>
+                        </ul>
+                    </div>
+                `;
+            }
+            else if (sectionKey === 'channels') {
+                box.className = 'glass-panel w-full max-w-2xl max-h-[88vh] rounded-3xl border-2 border-cyan-400/55 shadow-2xl flex flex-col overflow-hidden';
+                iconBox.className = 'w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-lg';
+                iconBox.innerHTML = '<i class="fa-solid fa-users-rectangle"></i>';
+                titleEl.innerText = 'کانال اف ای و گروه‌های رسمی دستیاران';
+                subEl.innerText = 'برای عضویت روی هر لینک کلیک کنید';
+
+                let chanHtml = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
+                appData.channels.forEach(chan => {
+                    chanHtml += `
+                        <a href="${escapeHtml(chan.url)}" target="_blank" class="p-4 rounded-2xl bg-slate-900/90 border border-cyan-400/30 hover:border-cyan-400 flex items-center justify-between group transition">
+                            <span class="font-bold text-white text-xs sm:text-sm group-hover:text-cyan-300 transition">${escapeHtml(chan.title)}</span>
+                            <i class="fa-solid fa-arrow-up-left-from-square text-cyan-400"></i>
+                        </a>
+                    `;
+                });
+                chanHtml += '</div>';
+                bodyEl.innerHTML = chanHtml;
+            }
+
+            modal.classList.remove('hidden');
+        };
+
+        window.closeSectionModal = function() {
+            activeModalSection = null;
+            document.getElementById('sectionDetailsModal').classList.add('hidden');
+        };
+
+        window.openFeedbackModal = function(index) {
+            currentActiveAssistant = appData.assistants[index];
+            document.getElementById('modalAssistantName').innerText = currentActiveAssistant.name;
+            document.getElementById('modalDirectProfile').href = currentActiveAssistant.profile;
+
+            const callGroupBtn = document.getElementById('modalCallGroup');
+            const astGroupBtn = document.getElementById('modalAssistantGroup');
+            const hasCallGroup = currentActiveAssistant.callGroup && currentActiveAssistant.callGroup.trim() !== '';
+
+            if (hasCallGroup) {
+                callGroupBtn.href = currentActiveAssistant.callGroup;
+                callGroupBtn.classList.remove('hidden');
+                astGroupBtn.classList.add('hidden');
+            } else {
+                callGroupBtn.classList.add('hidden');
+                astGroupBtn.href = currentActiveAssistant.group || currentActiveAssistant.profile;
+                astGroupBtn.classList.remove('hidden');
+            }
+
+            document.getElementById('feedbackModal').classList.remove('hidden');
+        };
+
+        window.closeFeedbackModal = function() {
+            document.getElementById('feedbackModal').classList.add('hidden');
+        };
+
+        window.selectFeedbackOption = function(optionType) {
+            if (!currentActiveAssistant) return;
+            const hasCallGroup = currentActiveAssistant.callGroup && currentActiveAssistant.callGroup.trim() !== '';
+            const targetUrl = hasCallGroup ? currentActiveAssistant.callGroup : currentActiveAssistant.profile;
+            const targetLabel = hasCallGroup ? 'کال گروه' : 'پروفایل';
+            showToast(`گزینه «${optionType}» انتخاب شد؛ در حال اتصال به ${targetLabel} ${currentActiveAssistant.name}...`);
+            window.open(targetUrl, '_blank');
+            closeFeedbackModal();
+        };
+
+        window.copyToClipboard = function(text) {
+            const dummy = document.createElement('textarea');
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast('آیدی کپی شد: ' + text);
+        };
+
+        function escapeHtml(str) {
+            if (typeof str !== 'string') return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[70] bg-sky-500 text-slate-950 font-black text-xs px-5 py-3 rounded-2xl shadow-2xl border border-white';
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3200);
+        }
+
+        window.openAdminAuthModal = async function() {
+            if (isAdminAuthenticated) {
+                openAdminPanel();
+                return;
+            }
+
+            const modal = document.getElementById('adminAuthModal');
+            const setupView = document.getElementById('adminSetupView');
+            const loginView = document.getElementById('adminLoginView');
+
+            setupView.classList.add('hidden');
+            loginView.classList.remove('hidden');
+            modal.classList.remove('hidden');
+
+            checkBruteForceLockout();
+
+            if (db && currentUser) {
+                try {
+                    const credDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'admin_security', 'master_key');
+                    const credSnap = await getDoc(credDocRef);
+                    if (!credSnap.exists() || !credSnap.data().hash) {
+                        loginView.classList.add('hidden');
+                        setupView.classList.remove('hidden');
+                    }
+                } catch (err) {
+                    console.error("Credential check error:", err);
+                }
+            }
+        };
+
+        window.closeAdminAuthModal = function() {
+            document.getElementById('adminAuthModal').classList.add('hidden');
+        };
+
+        window.togglePasswordVisibility = function() {
+            const inp = document.getElementById('adminPasswordInput');
+            const ico = document.getElementById('eyeIcon');
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+            ico.className = inp.type === 'password' ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
+        };
+
+        function checkBruteForceLockout() {
+            const now = Date.now();
+            const lockBox = document.getElementById('lockoutAlertBox');
+            const submitBtn = document.getElementById('loginSubmitBtn');
+            const inputEl = document.getElementById('adminPasswordInput');
+
+            if (lockoutUntilTimestamp > now) {
+                lockBox.classList.remove('hidden');
+                inputEl.disabled = true;
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+                if (lockoutInterval) clearInterval(lockoutInterval);
+                lockoutInterval = setInterval(() => {
+                    const remainingMs = lockoutUntilTimestamp - Date.now();
+                    if (remainingMs <= 0) {
+                        clearInterval(lockoutInterval);
+                        failedAttempts = 0;
+                        lockoutUntilTimestamp = 0;
+                        lockBox.classList.add('hidden');
+                        inputEl.disabled = false;
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        document.getElementById('loginErrorMsg').classList.add('hidden');
+                    } else {
+                        const mins = String(Math.floor(remainingMs / 60000)).padStart(2, '0');
+                        const secs = String(Math.floor((remainingMs % 60000) / 1000)).padStart(2, '0');
+                        document.getElementById('lockoutCountdown').innerText = `${mins}:${secs}`;
+                    }
+                }, 500);
+                return true;
+            }
+            return false;
+        }
+
+        window.handleFirstTimeAdminSetup = async function(e) {
+            e.preventDefault();
+            const newPass = document.getElementById('setupNewPassInput').value.trim();
+            const confirmPass = document.getElementById('setupConfirmPassInput').value.trim();
+            const errEl = document.getElementById('setupErrorMsg');
+            const btn = document.getElementById('setupSubmitBtn');
+
+            errEl.classList.add('hidden');
+
+            if (newPass.length < 6) {
+                errEl.innerText = 'کد محرمانه باید حداقل ۶ کاراکتر باشد.';
+                errEl.classList.remove('hidden');
+                return;
+            }
+            if (newPass !== confirmPass) {
+                errEl.innerText = 'تکرار کد محرمانه مطابقت ندارد!';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = 'در حال رمزنگاری و ذخیره‌سازی امن...';
+
+            try {
+                const salt = generateCryptoSalt();
+                const hash = await deriveSaltedHash(newPass, salt);
+
+                if (db && currentUser) {
+                    const credDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'admin_security', 'master_key');
+                    await setDoc(credDocRef, { salt: salt, hash: hash, createdAt: Date.now() });
+                }
+
+                document.getElementById('setupNewPassInput').value = '';
+                document.getElementById('setupConfirmPassInput').value = '';
+
+                grantAdminAccess(hash);
+                closeAdminAuthModa
